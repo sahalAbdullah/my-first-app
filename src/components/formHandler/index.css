@@ -1,0 +1,18 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.inputWidth {
+  width: 30%;
+}
+
+.textError {
+  color: red;
+  text-align: center;
+  font-size: small;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
