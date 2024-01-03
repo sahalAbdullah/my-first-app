@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from 'react';
 interface IFormInput {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 export default function FormSecondScreen() {
   const MAX_FILES_ALLOWED = 6;
@@ -38,6 +39,7 @@ export default function FormSecondScreen() {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<IFormInput>();
 
@@ -71,13 +73,32 @@ export default function FormSecondScreen() {
             className="inputWidth"
             type="password"
             {...register('password', {
-              required: 'Password is required',
-              minLength: {
-                value: 8,
-                message: 'Password must be at least 8 characters',
+              required:
+                'Password must contain at least 8 characters, one uppercase letter, one numeric digit, and one special character',
+              pattern: {
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                message:
+                  'Password must contain at least 8 characters, one uppercase letter, one numeric digit, and one special character',
               },
             })}
           />
+          {errors.password && <span>{errors.password.message}</span>}
+        </div>
+        <div className="form-group">
+          <label>Current Password</label>
+          <input
+            className="inputWidth"
+            type="password"
+            {...register('confirmPassword', {
+              required: 'Please confirm your password',
+              validate: (value) =>
+                value === getValues('password') || 'Passwords do not match',
+            })}
+          />
+          {errors.confirmPassword && (
+            <span>{errors.confirmPassword.message}</span>
+          )}
         </div>
         <div>
           <div className="imageContainer">
