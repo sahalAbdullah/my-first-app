@@ -7,7 +7,7 @@
   background-color: #f0f0f0;
 }
 .loginForm {
-  width: 300px;
+  width: 400px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -54,4 +54,44 @@ span {
   font-size: 14px;
   margin-top: 5px;
   display: block;
+}
+
+.imageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.imageContainer > div {
+  margin-bottom: 20px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileInputLabel {
+  display: block;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #5a7eec;
+  color: white;
+  cursor: pointer;
+}
+
+.fileInputLabel:hover {
+  background-color: #405ec3;
+}
+
+.fileInputLabel:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 14px;
 }
