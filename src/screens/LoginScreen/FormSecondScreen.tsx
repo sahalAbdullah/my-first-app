@@ -9,16 +9,11 @@ interface IFormInput {
 export default function FormSecondScreen() {
   const MAX_FILES_ALLOWED = 6;
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
-  const [errorMsg, setErrorMsg] = useState('');
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const files = Array.from(event.target.files);
-      if (selectedImages.length + files.length > 6) {
-        setErrorMsg('Maximum 6 images allowed.');
-        return;
-      }
-      setErrorMsg('');
+
       if (selectedImages.length + files.length > MAX_FILES_ALLOWED) {
         alert(`You can select a maximum of ${MAX_FILES_ALLOWED} files.`);
         event.preventDefault();
@@ -53,12 +48,13 @@ export default function FormSecondScreen() {
   };
 
   return (
-    <div>
+    <div className="mt-4">
       <form onSubmit={handleSubmit(onSubmit)} className="loginForm">
         <h2>Login</h2>
         <div className="form-group">
           <label>Email</label>
           <input
+            className="inputWidth"
             {...register('email', {
               required: 'Email is required',
               pattern: {
@@ -72,6 +68,7 @@ export default function FormSecondScreen() {
         <div className="form-group">
           <label>Password</label>
           <input
+            className="inputWidth"
             type="password"
             {...register('password', {
               required: 'Password is required',
@@ -81,21 +78,31 @@ export default function FormSecondScreen() {
               },
             })}
           />
-          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div>
           <div className="imageContainer">
             {selectedImages.map((image, index) => (
               <div key={index}>
-                <img alt={`image-${index}`} width={'250px'} src={image} />
+                <img alt={`image-${index}`} width={'150px'} src={image} />
                 <br />
-                <button onClick={() => removeImage(index)}>Remove</button>
+                <button
+                  className="removeButton"
+                  onClick={() => removeImage(index)}
+                >
+                  Remove
+                </button>
               </div>
             ))}
           </div>
           <br />
           <div>
-            <label className="fileInputLabel">
+            <label
+              className={` ${
+                selectedImages.length >= 6
+                  ? 'fileInputLabelDisabled'
+                  : 'fileInputLabel'
+              }`}
+            >
               <input
                 type="file"
                 name="myImage"
@@ -103,11 +110,10 @@ export default function FormSecondScreen() {
                 multiple
                 className="fileInput"
                 accept="image/*"
-                disabled={selectedImages.length === 6}
+                disabled={selectedImages.length >= 6}
               />
               Upload Image
             </label>
-            {errorMsg && <p className="errorMsg">{errorMsg}</p>}
           </div>
         </div>
         <button type="submit" className="buttonSubmit">

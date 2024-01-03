@@ -27,13 +27,6 @@ label {
   font-weight: bold;
 }
 
-input {
-  width: calc(100% - 10px);
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
 .buttonSubmit {
   width: 100%;
   padding: 10px;
@@ -61,14 +54,11 @@ span {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row;
 }
 
 .imageContainer > div {
   margin-bottom: 20px;
-}
-
-.fileInput {
-  display: none;
 }
 
 .fileInputLabel {
@@ -81,17 +71,46 @@ span {
   color: white;
   cursor: pointer;
 }
-
+.fileInput {
+  display: none;
+}
+.fileInput:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 .fileInputLabel:hover {
   background-color: #405ec3;
 }
 
-.fileInputLabel:disabled {
+.fileInputLabelDisabled {
   background-color: #ccc;
   cursor: not-allowed;
+  display: block;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
 }
 
 .errorMsg {
   color: red;
   font-size: 14px;
+}
+.inputWidth {
+  width: 100%;
+}
+
+.removeButton {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+  background-color: #c62828;
 }
