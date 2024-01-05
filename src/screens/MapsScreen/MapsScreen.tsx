@@ -5,6 +5,7 @@ import GooglePlacesAutocomplete, {
 import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 import './index.css';
+import { GOOGLE_API_KEY } from '../../env/maps.env';
 
 const mapContainerStyle = {
   width: '99vw',
@@ -26,13 +27,37 @@ const MapsScreen = () => {
     if (!place) return;
     console.log('Data', place.label);
     setPlaceName(place.label);
-
     await geocodeByAddress(place.label)
       .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
+      .then(({ lat, lng }: { lat: number; lng: number }) => {
         console.log('Successfully got latitude and longitude', { lat, lng });
         setLocation({ lat: lat, lng: lng });
+        getCityArea(lat, lng);
       });
+  };
+  const getCityArea = async (lat: number, lng: number) => {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_API_KEY}`
+    );
+    if (response.ok) {
+      const data = await response.json();
+      const addressComponents = data.results[0].address_components;
+      let city, area;
+      addressComponents.forEach(
+        (component: { types: string | string[]; long_name: any }) => {
+          if (component.types.includes('locality')) {
+            city = component.long_name;
+          }
+          if (component.types.includes('sublocality')) {
+            area = component.long_name;
+          }
+        }
+      );
+      console.log('City:', city);
+      console.log('Area:', area);
+    } else {
+      console.error('Failed to fetch reverse geocoding data');
+    }
   };
   const handleSubmit = () => {
     console.log(placeName, location);
