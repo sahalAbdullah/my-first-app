@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './index.css';
 import { ChangeEvent, useState } from 'react';
+import LearningRxjs from '../../components/LearningRxjs/LearningRxjs';
 interface IFormInput {
   email: string;
   password: string;
@@ -14,7 +15,6 @@ export default function FormSecondScreen() {
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const files = Array.from(event.target.files);
-
       if (selectedImages.length + files.length > MAX_FILES_ALLOWED) {
         alert(`You can select a maximum of ${MAX_FILES_ALLOWED} files.`);
         event.preventDefault();
@@ -51,7 +51,8 @@ export default function FormSecondScreen() {
 
   return (
     <div className="mt-4">
-      <form onSubmit={handleSubmit(onSubmit)} className="loginForm">
+      <LearningRxjs />
+      {/* <form onSubmit={handleSubmit(onSubmit)} className="loginForm">
         <h2>Login</h2>
         <div className="form-group">
           <label>Email</label>
@@ -140,7 +141,7 @@ export default function FormSecondScreen() {
         <button type="submit" className="buttonSubmit">
           Login
         </button>
-      </form>
+      </form> */}
     </div>
   );
 }
