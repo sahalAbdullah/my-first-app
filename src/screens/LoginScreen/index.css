@@ -1,0 +1,116 @@
+.mainFormContainer {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+.loginForm {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.buttonSubmit {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.buttonSubmit:hover {
+  background-color: #0056b3;
+}
+
+span {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+}
+
+.imageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.imageContainer > div {
+  margin-bottom: 20px;
+}
+
+.fileInputLabel {
+  display: block;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #5a7eec;
+  color: white;
+  cursor: pointer;
+}
+.fileInput {
+  display: none;
+}
+.fileInput:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.fileInputLabel:hover {
+  background-color: #405ec3;
+}
+
+.fileInputLabelDisabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  display: block;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 14px;
+}
+.inputWidth {
+  width: 100%;
+}
+
+.removeButton {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+  background-color: #c62828;
+}
